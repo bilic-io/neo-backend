@@ -1,0 +1,8 @@
+# Cron job to run visa appointment monitoring every 3 hours
+# Format: minute hour day month day_of_week command
+
+# Run every 3 hours (at 00:00, 03:00, 06:00, 09:00, 12:00, 15:00, 18:00, 21:00)
+0 */3 * * * cd /Users/oracle/neo-backend && /opt/local/bin/bash -c 'source venv/bin/activate && python examples/agent.py >> /Users/oracle/neo-backend/visa_monitor.log 2>&1'
+
+# Alternative: Run every 3 hours starting from 1 AM (01:00, 04:00, 07:00, 10:00, 13:00, 16:00, 19:00, 22:00)
+# 0 1-23/3 * * * cd /Users/oracle/neo-backend && /opt/local/bin/bash -c 'source venv/bin/activate && python examples/agent.py >> /Users/oracle/neo-backend/visa_monitor.log 2>&1' 
