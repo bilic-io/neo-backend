@@ -1,33 +1,39 @@
-# AI Shopping Assistant 🤖
+# Visa Appointment Monitoring Agent 🕵️‍♂️📧
 
-This project demonstrates a practical implementation of [browser-use](https://github.com/browser-use/browser-use), a powerful tool that connects AI agents with browser capabilities. 
+This project implements an autonomous agent that monitors a specified webpage (such as a US Visa appointment portal) and sends email notifications when appointment statuses or relevant data change. It leverages browser automation, OpenAI's language models, and environment-based configuration for secure and adaptive monitoring.
 
-## 🌐 What is browser-use?
+## 🌐 What does it do?
 
-Browser-use is the easiest way to connect your AI agents with the browser. It provides a seamless interface for AI agents to interact with web content, making it perfect for tasks that require web browsing and data gathering.
+- Monitors a target webpage (e.g., US Visa appointment site) for changes or available slots
+- Handles login and navigation automatically
+- Sends real-time email notifications to users when appointments become available or when status changes
+- Provides adaptive monitoring intervals and session management
+- Keeps users informed with constant updates and rationale for monitoring intervals
 
 ## 📋 Project Overview
 
-This implementation uses browser-use to create an intelligent shopping assistant that:
-- Searches Amazon for the best deals on AI engineering laptops
-- Finds the latest PS5 action games
-- Analyzes product specifications and reviews
-- Compares prices and features
-- Generates a curated list with product details and purchase links in a draft.txt file
+This agent uses browser automation and AI to:
+- Log in to a secure portal (with credentials from environment variables)
+- Periodically check for appointment availability or other changes
+- Send email alerts to a configured recipient when:
+  - No appointments are available
+  - New appointments or relevant data are found
+- Adapt its monitoring frequency based on time of day, urgency, and historical patterns
 
 ## 🎯 Features
 
-- Automated product research
-- Price comparison
-- Specification analysis
-- Deal finding
-- Structured output in draft.txt
+- Automated login and navigation
+- Adaptive monitoring intervals
+- Email notifications for status changes
+- Secure configuration via `.env` file
+- Session and authentication persistence
 
 ## 🛠️ Technical Stack
 
 - Python
-- LangChain
-- OpenAI GPT-4
+- Selenium (for browser automation)
+- FastAPI (for API/websocket interface)
+- LangChain + OpenAI GPT (for agent logic)
 - browser-use agent
 - dotenv (for environment variable management)
 
@@ -41,20 +47,35 @@ This implementation uses browser-use to create an intelligent shopping assistant
    ```
 3. Install dependencies:
    ```bash
-   pip install python-dotenv langchain-openai browser-use
+   pip install -r requirements.txt
    ```
 4. Set up your environment variables in `.env`:
    ```
-   OPENAI_API_KEY=your_key_here
+   OPENAI_API_KEY=your_openai_key
+   EMAIL_HOST_USER=your_email@example.com
+   EMAIL_HOST_PASSWORD=your_email_password
+   EMAIL_HOST=smtp.example.com
+   EMAIL_PORT=465
+   VISA_APPOINTMENT_URL=
+   USER_EMAIL=your_portal_email
+   USER_PASSWORD=your_portal_password
+   TARGET_CONSULATE=Your Consulate
+   LOGIN_PAGE=
+   RECIPIENT_EMAIL_FOR_NOTIFICATIONS=notifyme@example.com
    ```
-5. Run the script:
+5. Run the agent:
    ```bash
-   python task.py
+   python scripts/agent.py
+   ```
+   Or start the API server:
+   ```bash
+   python scripts/api.py
    ```
 
 ## 📝 Note
 
-Make sure to keep your API keys secure and never commit them to version control. The `.gitignore` file is configured to exclude sensitive information.
+- Keep your API keys and credentials secure. Never commit your `.env` file to version control.
+- The `.gitignore` file is configured to exclude sensitive information.
 
 ## 📄 License
 
